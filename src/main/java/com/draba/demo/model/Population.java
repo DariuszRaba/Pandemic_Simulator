@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
@@ -21,6 +18,9 @@ public class Population {
     private int exposedPersons;
     private int deadPersons;
     private int healers;
+    @ManyToOne
+    @JoinColumn(name = "simulation_id",nullable = false)
+    private Simulation simulation;
 
     public Population(int infected, int exposedPersons, int deadPersons, int healers) {
         this.infected = infected;

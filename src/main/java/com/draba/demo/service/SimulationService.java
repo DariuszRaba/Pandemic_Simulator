@@ -4,7 +4,9 @@ import com.draba.demo.dto.SimulationDTO;
 import com.draba.demo.model.Population;
 import com.draba.demo.model.Simulation;
 import com.draba.demo.model.UserCreationForm;
+import com.draba.demo.repository.SimulationRepository;
 import com.draba.demo.util.SimulationToSimulationDTO;
+import com.draba.demo.util.UserCreationFormToSimulation;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class SimulationService {
+
+    private SimulationRepository simulationRepository;
 
 
     public SimulationDTO makeSimulation(UserCreationForm userCreationForm) {
@@ -25,6 +29,10 @@ public class SimulationService {
                 userCreationForm.getSimulationTime());
         simulation.setPopulationList(simulate(simulation));
         return new SimulationToSimulationDTO().convert(simulation);
+    }
+
+    public void saveSimulation(UserCreationForm userCreationForm) {
+        simulationRepository.save(new UserCreationFormToSimulation().convert(userCreationForm));
     }
 
     private List<Population> simulate(Simulation simulation) {

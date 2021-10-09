@@ -1,7 +1,11 @@
 package com.draba.demo.model;
 
+import com.draba.demo.dto.PopulationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.List;
+
 @AllArgsConstructor
 @Data
 public class UserCreationForm {
@@ -13,4 +17,6 @@ public class UserCreationForm {
     private int recoveryTimeFrame;
     private int deathTimeFrame;
     private int simulationTime;
+    private List<PopulationDTO> populationDTOList;
+
 }
