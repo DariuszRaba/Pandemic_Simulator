@@ -4,18 +4,22 @@ import com.draba.demo.dto.SimulationDTO;
 import com.draba.demo.model.Population;
 import com.draba.demo.model.Simulation;
 import com.draba.demo.model.UserCreationForm;
+import com.draba.demo.repository.PopulationRepository;
 import com.draba.demo.repository.SimulationRepository;
 import com.draba.demo.util.SimulationToSimulationDTO;
 import com.draba.demo.util.UserCreationFormToSimulation;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class SimulationService {
 
-    private SimulationRepository simulationRepository;
+    private final SimulationRepository simulationRepository;
+//    private final PopulationRepository populationRepository;
 
 
     public SimulationDTO makeSimulation(UserCreationForm userCreationForm) {
@@ -75,4 +79,7 @@ public class SimulationService {
     }
 
 
+    public void remove(String id) {
+        simulationRepository.deleteById(Long.parseLong(id));
+    }
 }

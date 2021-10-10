@@ -2,11 +2,13 @@ package com.draba.demo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
-//@AllArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Simulation {
     @Id
@@ -20,7 +22,7 @@ public class Simulation {
     private int recoveryTimeFrame;
     private int deathTimeFrame;
     private int simulationTime;
-    @OneToMany(mappedBy = "simulation")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Population> populationList;
 
     public Simulation(String name, int population, int infected, float virusReproductionRate, float mortalityRate, int recoveryTimeFrame, int deathTimeFrame, int simulationTime) {

@@ -18,9 +18,6 @@ public class Population {
     private int exposedPersons;
     private int deadPersons;
     private int healers;
-    @ManyToOne
-    @JoinColumn(name = "simulation_id",nullable = false)
-    private Simulation simulation;
 
     public Population(int infected, int exposedPersons, int deadPersons, int healers) {
         this.infected = infected;

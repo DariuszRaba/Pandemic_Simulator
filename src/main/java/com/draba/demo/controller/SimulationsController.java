@@ -1,12 +1,10 @@
 package com.draba.demo.controller;
 
 import com.draba.demo.dto.SimulationDTO;
-import com.draba.demo.model.Simulation;
 import com.draba.demo.model.UserCreationForm;
 import com.draba.demo.service.SimulationService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +25,14 @@ public class SimulationsController {
 
     @PostMapping(value = "/save", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestBody
-    public void saveSimulation(@RequestBody HttpEntity<String> httpEntity) {
-        String json = httpEntity.getBody();
-        ObjectMapper mapper = new ObjectMapper();
-//        Simulation simulation = mapper.readValue()
-//        simulationService.saveSimulation(userCreationForm);
+    public void saveSimulation(@RequestBody UserCreationForm userCreationForm) throws JsonProcessingException {
+        simulationService.saveSimulation(userCreationForm);
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void removeSimulation(@PathVariable String id){
+        simulationService.remove(id);
     }
 
 }
