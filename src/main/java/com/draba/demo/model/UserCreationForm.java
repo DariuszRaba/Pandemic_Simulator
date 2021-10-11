@@ -19,6 +19,7 @@ public class UserCreationForm {
     private int recoveryTimeFrame;
     private int deathTimeFrame;
     private int simulationTime;
-    private List<PopulationDTO> populationDTOList;
+    private List<PopulationDTO> populationList;
+
 
 }

@@ -17,7 +17,7 @@ public class UserCreationFormToSimulation {
                 userCreationForm.getRecoveryTimeFrame(),
                 userCreationForm.getDeathTimeFrame(),
                 userCreationForm.getSimulationTime(),
-                userCreationForm.getPopulationDTOList().stream()
+                userCreationForm.getPopulationList().stream()
                         .map(populationDTO -> new PopulationDtoToPopulation().convert(populationDTO))
                         .collect(Collectors.toList()));
     }

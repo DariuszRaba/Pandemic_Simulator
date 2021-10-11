@@ -35,8 +35,8 @@ public class SimulationService {
         return new SimulationToSimulationDTO().convert(simulation);
     }
 
-    public void saveSimulation(UserCreationForm userCreationForm) {
-        simulationRepository.save(new UserCreationFormToSimulation().convert(userCreationForm));
+    public Simulation saveSimulation(UserCreationForm userCreationForm) {
+        return simulationRepository.save(new UserCreationFormToSimulation().convert(userCreationForm));
     }
 
     private List<Population> simulate(Simulation simulation) {
