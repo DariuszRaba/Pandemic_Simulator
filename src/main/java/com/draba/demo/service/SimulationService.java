@@ -4,22 +4,25 @@ import com.draba.demo.dto.SimulationDTO;
 import com.draba.demo.model.Population;
 import com.draba.demo.model.Simulation;
 import com.draba.demo.model.UserCreationForm;
-import com.draba.demo.repository.PopulationRepository;
 import com.draba.demo.repository.SimulationRepository;
 import com.draba.demo.util.SimulationToSimulationDTO;
 import com.draba.demo.util.UserCreationFormToSimulation;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class SimulationService {
 
     private final SimulationRepository simulationRepository;
-//    private final PopulationRepository populationRepository;
 
 
     public SimulationDTO makeSimulation(UserCreationForm userCreationForm) {
@@ -80,6 +83,21 @@ public class SimulationService {
 
 
     public void remove(String id) {
-        simulationRepository.deleteById(Long.parseLong(id));
+        try {
+            simulationRepository.deleteById(Long.parseLong(id));
+        }catch (EmptyResultDataAccessException e){
+            throw new ResponseStatusException(
+                    HttpStatus.NO_CONTENT,"No such simulation",e
+            );
+        }
+    }
+
+    public SimulationDTO getSimulationByID(String id) {
+        try {
+            final Optional<Simulation> theSimulation = simulationRepository.findById(Long.parseLong(id));
+            return new SimulationToSimulationDTO().convert(theSimulation.orElseThrow());
+        }catch (NoSuchElementException e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such simulation");
+        }
     }
 }

@@ -17,19 +17,26 @@ public class SimulationsController {
 
     private final SimulationService simulationService;
 
-    @GetMapping(value = "/simulate", produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/simulate",produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public SimulationDTO makeSimulation(@RequestBody UserCreationForm userCreationForm) {
         return simulationService.makeSimulation(userCreationForm);
     }
 
-    @PostMapping(value = "/save", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}",produces = APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public SimulationDTO getTheSimulation(@PathVariable String id){
+        return simulationService.getSimulationByID(id);
+    }
+
+
+    @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void saveSimulation(@RequestBody UserCreationForm userCreationForm) throws JsonProcessingException {
         simulationService.saveSimulation(userCreationForm);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void removeSimulation(@PathVariable String id){
         simulationService.remove(id);
