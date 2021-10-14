@@ -9,6 +9,7 @@ public class SimulationToSimulationDTO {
 
     public SimulationDTO convert(Simulation simulation) {
         return new SimulationDTO(
+                simulation.getId(),
                 simulation.getName(),
                 simulation.getPopulation(),
                 simulation.getInfected(),
@@ -21,4 +22,5 @@ public class SimulationToSimulationDTO {
                         .map(population -> new PopulationToPopulationDTO().convert(population))
                         .collect(Collectors.toList()));
     }
+
 }

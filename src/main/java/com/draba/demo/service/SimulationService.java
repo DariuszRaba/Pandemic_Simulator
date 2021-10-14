@@ -1,5 +1,6 @@
 package com.draba.demo.service;
 
+import com.draba.demo.dto.SimplifiedSimulationDTO;
 import com.draba.demo.dto.SimulationDTO;
 import com.draba.demo.model.Population;
 import com.draba.demo.model.Simulation;
@@ -85,9 +86,9 @@ public class SimulationService {
     public void remove(String id) {
         try {
             simulationRepository.deleteById(Long.parseLong(id));
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(
-                    HttpStatus.NO_CONTENT,"No such simulation",e
+                    HttpStatus.NO_CONTENT, "No such simulation", e
             );
         }
     }
@@ -96,8 +97,12 @@ public class SimulationService {
         try {
             final Optional<Simulation> theSimulation = simulationRepository.findById(Long.parseLong(id));
             return new SimulationToSimulationDTO().convert(theSimulation.orElseThrow());
-        }catch (NoSuchElementException e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such simulation");
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No such simulation");
         }
+    }
+
+    public List<SimplifiedSimulationDTO> getAllSimulation() {
+        return simulationRepository.getAllSimulationNames();
     }
 }

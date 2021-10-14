@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class SimulationDTO {
+    private Long id;
     private String name;
     private int population;
     private int infected;
@@ -19,4 +20,6 @@ public class SimulationDTO {
     private int deathTimeFrame;
     private int simulationTime;
     private List<PopulationDTO> populationList;
+
 }
+
