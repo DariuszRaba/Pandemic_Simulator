@@ -1,0 +1,13 @@
+<div *ngIf="simList.simulations">
+  <ul>
+    <li *ngFor="let s of simList.simulations; let i = index">
+      <div> Simulation# {{i + 1}} {{s.name}}
+        <button routerLink="details" (click)="sendI(s.id)">Show Details</button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+
+

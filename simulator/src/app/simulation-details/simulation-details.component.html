@@ -1,0 +1,21 @@
+<div *ngIf="simulationDto">
+  this is simulation specification
+  <p>Name: {{simulationDto.name}}</p>
+  <button class="red" (click)="removeSimulation(id) ">Remove</button>
+  <p>Population: {{simulationDto.population}}</p>
+  <p>Infected: {{simulationDto.infected}}</p>
+  <p>Virus Reproduction rate: {{simulationDto.virusReproductionRate}}</p>
+  <p>Mortality rate: {{simulationDto.mortalityRate}}</p>
+  <p>Recovery Time frame: {{simulationDto.recoveryTimeFrame}}</p>
+  <p>Death Time frame: {{simulationDto.deathTimeFrame}}</p>
+  <p>Simulation Time frame: {{simulationDto.simulationTime}}</p>
+  <ul>
+    <div class="navbar n">
+      Day# | Infection | Exposure | Deaths | Healers
+    </div>
+
+    <li class="clear" *ngFor="let p of simulationDto.populationList; let i = index">
+      <div class="navbar">#{{i + 1}} | {{p.infected}} | {{p.exposedPersons}} | {{p.deadPersons}} | {{p.healers}}</div>
+    </li>
+  </ul>
+</div>

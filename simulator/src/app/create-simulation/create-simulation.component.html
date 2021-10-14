@@ -1,0 +1,23 @@
+<p>create-simulation works!</p>
+
+<p>Name: <input type="text" id="name" name="name" [(ngModel)]="name"> </p>
+<p>Population: <input type="number" id="population" name="population" [(ngModel)]="population"></p>
+<p>Infected:  <input type="number" id="infected" name="infected" [(ngModel)]="infected"></p>
+<p>Virus Reproduction rate: <input type="number" id="reproduction" name="reproduction" [(ngModel)]="reproduction"></p>
+<p>Mortality rate: <input type="number" id="mortality" name="mortality" [(ngModel)]="mortality"></p>
+<p>Recovery Time frame: <input type="number" id="recovery" name="recovery" [(ngModel)]="recovery"></p>
+<p>Death Time frame: <input type="number" id="death" name="death" [(ngModel)]="death"></p>
+<p>Simulation Time frame: <input type="number" id="simulationTime" name="simulationTime" [(ngModel)]="simulationTime"></p>
+<div *ngIf="simulation.populationList">
+  <ul>
+  <div class="navbar n">
+    Day# | Infection | Exposure | Deaths | Healers
+  </div>
+
+  <li class="clear" *ngFor="let p of simulation.populationList; let i = index">
+    <div class="navbar">#{{i + 1}} | {{p.infected}} | {{p.exposedPersons}} | {{p.deadPersons}} | {{p.healers}}</div>
+  </li>
+  </ul>
+</div>
+<button (click)="simulate()">Simulate</button>
+<button (click)="save()">Save</button>
